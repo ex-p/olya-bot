@@ -16,7 +16,7 @@ class Method(object):
     @staticmethod
     def _process_response(response, cls=None):
         response.raise_for_status()
-        logger.info('On request {} get response {}'.format(response.url, response.content))
+        logger.info('On request get response {}'.format(response.url, response.content))
         response = response.json()
         error = response.get('error')
         content = response.get('response')

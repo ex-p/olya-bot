@@ -2,6 +2,7 @@ import json
 import os
 
 import dj_database_url
+import pymongo
 
 from api.vk import VkApi
 
@@ -13,6 +14,9 @@ SECRET_KEY = secrets['secret']
 VK_API = VkApi(secrets['token'])
 CONFIRMATION_CODE = secrets['confirmation']
 CALLBACK_PATH = secrets['callback_path']
+MONGO_CLIENT = pymongo.MongoClient(secrets['mongo'])
+MONGO_DB = MONGO_CLIENT.get_database('bot')
+USERS = MONGO_DB.get_collection('users')
 
 DEBUG = True
 
