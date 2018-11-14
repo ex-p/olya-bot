@@ -1,3 +1,11 @@
+import logging
+
+import requests
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+
 class Method(object):
     def __init__(self, http, prefix):
         self._http = http
@@ -8,8 +16,9 @@ class Method(object):
         return self._http.request_method(url, params=parameters)
 
     @staticmethod
-    def _process_response(response, cls):
+    def _process_response(response, cls=None):
         response.raise_for_status()
+        logger.info('On request {} get response {}'.format(response.url, response.content))
         response = response.json()
         error = response.get('error')
         content = response.get('response')
